@@ -32,24 +32,18 @@ router.put(
 );
 
 //get all products
-router.get("/get-allProduct", requireSignIn, isAdmin, getAllProductController);
+router.get("/get-allProduct", getAllProductController);
 
 //get a product
-router.get("/getProduct/:slug", requireSignIn, isAdmin, getProduct);
+router.get("/getProduct/:slug", getProduct);
 
 //get photo
-router.get(
-  "/product-photo/:pid",
-  requireSignIn,
-  isAdmin,
-  productPhotoController
-);
+router.get("/product-photo/:pid", productPhotoController);
 
 //delete product
 router.delete(
   "/deleteProduct/:pid",
-  requireSignIn,
-  isAdmin,
+
   deleteProductController
 );
 export default router;
