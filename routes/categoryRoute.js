@@ -29,10 +29,10 @@ router.put(
 export default router;
 
 //get All Category
-router.get("/getAllCategory", requireSignIn, isAdmin, getAllCategory);
+router.get("/getAllCategory", getAllCategory);
 
 //get a category
-router.get("/get-category/:slug", requireSignIn, isAdmin, getCategory);
+router.get("/get-category/:slug", getCategory);
 
 //delete a category
-router.delete("/delete-category/:id", requireSignIn, isAdmin, deleteCategory);
+router.delete("/delete-category/:id", deleteCategory);
