@@ -259,3 +259,28 @@ export const searchProductController = async (req, res) => {
     });
   }
 };
+
+//similar Product
+export const relatedProductController = async (req, res) => {
+  try {
+    const { pid, cid } = req.params;
+    const products = await Product.find({
+      category: cid,
+      _id: { $ne: pid },
+    })
+      .select("-photo")
+      .limit(3)
+      .populate("category");
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Lỗi khi lấy ra những sản phẩm giống nhau",
+      error,
+    });
+  }
+};

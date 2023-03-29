@@ -35,4 +35,4 @@ router.get("/getAllCategory", getAllCategory);
 router.get("/get-category/:slug", getCategory);
 
 //delete a category
-router.delete("/delete-category/:id", deleteCategory);
+router.delete("/delete-category/:id", requireSignIn, isAdmin, deleteCategory);
