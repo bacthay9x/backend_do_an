@@ -1,4 +1,5 @@
 import Product from "../models/productModel.js";
+import Category from "../models/categoryModel.js";
 import fs, { copyFileSync } from "fs";
 import slugify from "slugify";
 
@@ -281,6 +282,25 @@ export const relatedProductController = async (req, res) => {
       success: false,
       message: "Lỗi khi lấy ra những sản phẩm giống nhau",
       error,
+    });
+  }
+};
+
+export const productCategoryController = async (req, res) => {
+  try {
+    const category = await Category.findOne({ slug: req.params.slug });
+    const products = await Product.find({ category }).populate("category");
+    res.status(200).send({
+      success: true,
+      category,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      error,
+      message: "Error While getting products",
     });
   }
 };
